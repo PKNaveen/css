@@ -95,28 +95,30 @@ export class YourComponent implements OnInit, OnDestroy {
     window.addEventListener('scroll', scrollTop);
 
     // ===================== DARK LIGHT THEME ====================
-    const darkTheme = 'dark-theme';
-    const iconTheme = 'bx-toggle-right';
+     const darkTheme = 'dark-theme';
+  const iconTheme = 'bx-toggle-left'; // Change this to match your dark theme icon class.
 
-    const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light';
-    const getCurrentIcon = () => themeButton?.classList.contains(iconTheme) ? 'bx-toggle-left' : 'bx-toggle-right';
+  const themeButton = document.getElementById('theme-button');
 
-    const selectedTheme = localStorage.getItem('selected-theme');
-    const selectedIcon = localStorage.getItem('selected-icon');
+  const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light';
 
-    if (selectedTheme) {
-      document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme);
-      // You should add themeButton to your component's template in the HTML file
-      // themeButton?.classList[selectedIcon === 'bx-toggle-left' ? 'add' : 'remove'](iconTheme);
+  const selectedTheme = localStorage.getItem('selected-theme');
+
+  if (selectedTheme) {
+    this.renderer.addClass(document.body, darkTheme);
+    if (themeButton) {
+      this.renderer.addClass(themeButton, iconTheme);
     }
+  }
 
-    // You can add an event listener to the theme button in your component's template in the HTML file
-    // themeButton?.addEventListener('click', () => {
-    //   document.body.classList.toggle(darkTheme);
-    //   themeButton?.classList.toggle(iconTheme);
-    //   localStorage.setItem('selected-theme', getCurrentTheme());
-    //   localStorage.setItem('selected-icon', getCurrentIcon());
-    // });
+  if (themeButton) {
+    this.renderer.listen(themeButton, 'click', () => {
+      document.body.classList.toggle(darkTheme);
+      if (themeButton) {
+        themeButton.classList.toggle(iconTheme);
+      }
+      localStorage.setItem('selected-theme', getCurrentTheme());
+    });
   }
 
   ngOnDestroy(): void {

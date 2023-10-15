@@ -1,8 +1,10 @@
+/* your-component.component.css */
+
 /*===== GOOGLE FONTS =====*/
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
 /*===== VARIABLES CSS =====*/
-:root {
+:host {
   --header-height: 3rem;
 
   /*========== Colors ==========*/
@@ -41,7 +43,7 @@
 }
 
 @media screen and (min-width: 968px){
-  :root{
+  :host{
     --biggest-font-size: 3rem;
     --h2-font-size: 1.75rem;
     --h3-font-size: 1.25rem;
@@ -79,7 +81,7 @@ body.dark-theme{
   cursor: pointer;
 }
 
-body{
+:host body{
   margin: var(--header-height) 0 0 0;
   font-family: var(--body-font);
   font-size: var(--normal-font-size);
@@ -88,25 +90,25 @@ body{
   line-height: 1.6;
 }
 
-h1,h2,h3,ul,p{
+:host h1,:host h2,:host h3,:host ul,:host p{
   margin: 0;
 }
 
-h1,h2,h3{
+:host h1,:host h2,:host h3{
   font-weight: var(--font-semi-bold);
   color: var(--title-color);
 }
 
-ul{
+:host ul{
   padding: 0;
   list-style: none;
 }
 
-a{
+:host a{
   text-decoration: none;
 }
 
-img{
+:host img{
   max-width: 100%;
   height: auto;
 }

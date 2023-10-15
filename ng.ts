@@ -95,30 +95,30 @@ export class YourComponent implements OnInit, OnDestroy {
     window.addEventListener('scroll', scrollTop);
 
     // ===================== DARK LIGHT THEME ====================
-     const darkTheme = 'dark-theme';
-  const iconTheme = 'bx-toggle-left'; // Change this to match your dark theme icon class.
+   const darkTheme = 'dark-theme';
+    const iconTheme = 'bx-toggle-left';
 
-  const themeButton = document.getElementById('theme-button');
+    const themeButton = document.getElementById('theme-button');
 
-  const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light';
+    const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light';
 
-  const selectedTheme = localStorage.getItem('selected-theme');
+    const selectedTheme = localStorage.getItem('selected-theme');
 
-  if (selectedTheme) {
-    this.renderer.addClass(document.body, darkTheme);
-    if (themeButton) {
-      this.renderer.addClass(themeButton, iconTheme);
-    }
-  }
-
-  if (themeButton) {
-    this.renderer.listen(themeButton, 'click', () => {
-      document.body.classList.toggle(darkTheme);
+    if (selectedTheme) {
+      document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme);
       if (themeButton) {
-        themeButton.classList.toggle(iconTheme);
+        themeButton.classList[selectedTheme === 'dark' ? 'add' : 'remove'](iconTheme);
       }
-      localStorage.setItem('selected-theme', getCurrentTheme());
-    });
+    }
+
+    if (themeButton) {
+      themeButton.addEventListener('click', () => {
+        document.body.classList.toggle(darkTheme);
+        if (themeButton) {
+          themeButton.classList.toggle(iconTheme);
+        }
+        localStorage.setItem('selected-theme', getCurrentTheme());
+      });
   }
 
   ngOnDestroy(): void {
